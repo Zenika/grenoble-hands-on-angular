@@ -4,8 +4,7 @@
 
 ```
 npm install
-npm run lint
-npm run serve
+npm start
 ```
 
 ### Customize configuration
