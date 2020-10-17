@@ -7,7 +7,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { CityComponent } from './modules/city/city.component';
 import { HomeComponent } from './modules/home/home.component';
-import { LMapComponent } from './shared/components/lmap/lmap.component';
+import { LMapComponent } from './shared/components/lmap/l-map.component';
 import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
