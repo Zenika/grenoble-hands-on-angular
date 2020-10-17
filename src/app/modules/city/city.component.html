@@ -1,0 +1,12 @@
+<h1 class="title">Cities weather</h1>
+<article class="panel is-primary">
+  <div class="panel-heading"><h2>GRENOBLE</h2></div>
+  <div class="panel-block">
+    <app-lmap zoom="13" [lat]="cityLatitude" [long]="cityLongitude"></app-lmap>
+  </div>
+  <div class="panel-block">
+    <a routerLink="/" class="button is-rounded">
+      Go back home
+    </a>
+  </div>
+</article>
