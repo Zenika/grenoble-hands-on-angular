@@ -1,0 +1,21 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: node
+    steps:
+      - checkout
+      - run:
+          name: Install
+          command: |
+            npm ci
+      - run:
+          name: Lint
+          command: |
+            npm run lint
+      - run:
+          name: Build
+          command: |
+            npm run build
+      - store_artifacts:
+          path: dist/
