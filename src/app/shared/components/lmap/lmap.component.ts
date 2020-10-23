@@ -9,7 +9,7 @@ import L from 'leaflet'
 export class LMapComponent implements AfterViewInit {
 
   @Input()
-  zoom: number = 13
+  zoom = 13
   @Input()
   lat: number
   @Input()

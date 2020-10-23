@@ -64,15 +64,6 @@
       true,
       "as-needed"
     ],
-    "quotemark": [
-      true,
-      "single"
-    ],
-    "semicolon": {
-      "options": [
-        "always"
-      ]
-    },
     "space-before-function-paren": {
       "options": {
         "anonymous": "never",
@@ -82,10 +73,6 @@
         "named": "never"
       }
     },
-    "typedef": [
-      true,
-      "call-signature"
-    ],
     "typedef-whitespace": {
       "options": [
         {
