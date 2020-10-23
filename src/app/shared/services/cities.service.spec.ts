@@ -13,4 +13,13 @@ describe('CitiesService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should get cities', () => {
+    expect(service.getCities().length).toBe(10);
+  });
+
+  it('should get city by name', () => {
+    let cityName = "GRENOBLE";
+    expect(service.getCityPosition(cityName)).toBe(service.getCitiesPosition()[cityName]);
+  });
 });
