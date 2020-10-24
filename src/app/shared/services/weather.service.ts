@@ -2,13 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
-
-interface Weather {
-  date: string
-  temp2m: { max: number, min: number }
-  weather: string
-  wind10m_max: number
-}
+import {Weather} from "../model/weather";
 
 @Injectable({
   providedIn: 'root'
