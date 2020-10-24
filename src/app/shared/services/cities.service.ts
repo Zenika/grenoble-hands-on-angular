@@ -23,9 +23,6 @@ export class CitiesService {
     PARIS: new Coordinates(48.878932, 2.328487)
   }
 
-  constructor() {
-  }
-
   getCities(): string[] {
     return Object.keys(this.cities);
   }

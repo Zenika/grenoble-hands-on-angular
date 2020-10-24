@@ -15,7 +15,7 @@ interface Weather {
 })
 export class WeatherService {
 
-  constructor(private http: HttpClient) {
+  constructor(protected http: HttpClient) {
   }
 
   getCityNextWeekWeather(long, lat): Observable<Weather[]> {

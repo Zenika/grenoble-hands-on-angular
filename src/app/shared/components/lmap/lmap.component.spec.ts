@@ -16,6 +16,8 @@ describe('LMapComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LMapComponent);
     component = fixture.componentInstance;
+    component.lat = 45;
+    component.long = 5;
     fixture.detectChanges();
   });
 

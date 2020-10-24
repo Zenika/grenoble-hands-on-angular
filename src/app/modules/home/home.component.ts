@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CitiesService} from "../../shared/services/cities.service";
+import { CitiesService } from "../../shared/services/cities.service";
 
 @Component({
   selector: 'app-home',
@@ -10,10 +10,10 @@ export class HomeComponent implements OnInit {
 
   cities = [];
 
-  constructor(private citiesServicee: CitiesService) { }
+  constructor(protected citiesService: CitiesService) { }
 
   ngOnInit(): void {
-    this.cities = this.citiesServicee.getCities();
+    this.cities = this.citiesService.getCities();
   }
 
 }
