@@ -19,7 +19,7 @@ describe('CitiesService', () => {
   });
 
   it('should get city by name', () => {
-    let cityName = "GRENOBLE";
+    const cityName = "GRENOBLE";
     expect(service.getCityPosition(cityName)).toBe(service.getCitiesPosition()[cityName]);
   });
 });
