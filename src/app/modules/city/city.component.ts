@@ -17,6 +17,7 @@ export class CityComponent implements OnInit {
   cityName$: Observable<string>;
   cityWeather$: Observable<Weather[]>;
   cityCoords$: Observable<Coordinates>;
+  degree: 'C' | 'F' = 'C';
 
   constructor(protected weatherService: WeatherService, protected citiesService: CitiesService, protected route: ActivatedRoute) {
   }
