@@ -2,7 +2,7 @@
 <article class="panel is-primary">
   <div class="panel-heading"><h2>{{cityName$ | async}}</h2></div>
   <div class="panel-block">
-    <app-l-map zoom="13"  *ngIf="cityCoords$ | async as coords" [lat]="coords.latitude" [long]="coords.longitude"></app-l-map>
+    <app-l-map zoom="13" *ngIf="cityCoords$ | async as coords" [lat]="coords.latitude" [long]="coords.longitude"></app-l-map>
   </div>
   <div class="panel-block">
     <div class="control">
@@ -15,23 +15,51 @@
         F°
       </label>
     </div>
+    <div class="control">
+      <label class="radio">
+        <input type="radio" name="mode" value="simple" [(ngModel)]="mode">
+        Simple
+      </label>
+      <label class="radio">
+        <input type="radio" name="mode" value="detailed" [(ngModel)]="mode">
+        Detailed
+      </label>
+    </div>
   </div>
-  <div class="panel-block" *ngIf="cityWeather$ | async as cityWeather; else loading">
-    <table class="table">
-      <tr>
-        <th>Date</th>
-        <th>Weather</th>
-        <th>Max</th>
-        <th>Min</th>
-      </tr>
-      <tr *ngFor="let weather of cityWeather">
-        <td>{{weather.date}}</td>
-        <td><img [src]="'http://www.7timer.info/img/misc/about_civil_'+weather.weather+'.png'" alt=""></td>
-        <td>{{weather.temp2m.max | degree: degree}}</td>
-        <td>{{weather.temp2m.min | degree: degree}}</td>
-      </tr>
-    </table>
-  </div>
+  <ng-container *ngIf="mode === 'simple'">
+    <div class="panel-block" *ngIf="cityWeather$ | async as cityWeather; else loading">
+      <table class="table">
+        <tr>
+          <th>Date</th>
+          <th>Weather</th>
+          <th>Max</th>
+          <th>Min</th>
+        </tr>
+        <tr *ngFor="let weather of cityWeather">
+          <td>{{weather.date}}</td>
+          <td><img [src]="'http://www.7timer.info/img/misc/about_civil_'+weather.weather+'.png'" alt=""></td>
+          <td>{{weather.temp2m.max | degree: degree}}</td>
+          <td>{{weather.temp2m.min | degree: degree}}</td>
+        </tr>
+      </table>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="mode === 'detailed'">
+    <div class="panel-block" *ngIf="cityWeatherDetailed$ | async as cityWeather; else loading">
+      <table class="table">
+        <tr>
+          <th>Date</th>
+          <th>Weather</th>
+          <th>Temp</th>
+        </tr>
+        <tr *ngFor="let weather of cityWeather">
+          <td>{{weather.timepoint}}</td>
+          <td>{{weather.weather}}</td>
+          <td>{{weather.temp2m | degree: degree}}</td>
+        </tr>
+      </table>
+    </div>
+  </ng-container>
   <ng-template #loading>
     <div class="panel-block">Loading...</div>
   </ng-template>
