@@ -34,4 +34,8 @@ export class CitiesService {
   getCityPosition(cityName): Coordinates {
     return this.getCitiesPosition()[cityName]
   }
+
+  addCity(city: {name: string, latitude: number, longitude: number}) {
+    this.cities[city.name] = new Coordinates(city.latitude, city.longitude)
+  }
 }
