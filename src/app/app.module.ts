@@ -9,6 +9,8 @@ import { CityComponent } from './modules/city/city.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LMapComponent } from './shared/components/lmap/lmap.component';
 import { HttpClientModule } from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
+import { DegreePipe } from './shared/pipes/degree.pipe';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,15 @@ import { HttpClientModule } from "@angular/common/http";
     FooterComponent,
     CityComponent,
     HomeComponent,
-    LMapComponent
+    LMapComponent,
+    DegreePipe
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
