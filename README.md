@@ -20,6 +20,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Step 2 : Afficher la météo du jour pour toutes les villes Zenika
 
+- Afficher toutes les villes sur la page d'accueil (https://angular.io/api/common/NgForOf)
 - Utiliser les getters du [service cities](./src/app/shared/services/cities.service.ts) pour récupérer les coordonnées de la ville par son nom à partir des `props` du composant (https://angular.io/guide/inputs-outputs#input)
 - Appeler le client HTTP via le *service weather* avec ces coordonnées (https://angular.io/guide/http#requesting-data-from-a-server)
 
