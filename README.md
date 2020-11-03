@@ -49,3 +49,35 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Créer un nouveau point d'entrée sur le service d'api pour consommer ces données
 - Afficher le résultat de la météo détaillée sur la page de la ville
 - Ajouter un bouton pour afficher le mode simple ou le mode détaillé 
+
+## Correction
+
+<details>
+  <summary>Step 1</summary>
+  https://github.com/Zenika/grenoble-hands-on-angular/compare/step0...step1
+</details>
+
+<details>
+  <summary>Step 2</summary>
+  https://github.com/Zenika/grenoble-hands-on-angular/compare/step1...step2
+</details>
+
+<details>
+  <summary>Step 3</summary>
+  https://github.com/Zenika/grenoble-hands-on-angular/compare/step2...step3
+</details>
+
+<details>
+  <summary>Step 4</summary>
+  https://github.com/Zenika/grenoble-hands-on-angular/compare/step3...step4
+</details>
+
+<details>
+  <summary>Step 5</summary>
+  https://github.com/Zenika/grenoble-hands-on-angular/compare/step4...step5
+</details>
+
+<details>
+  <summary>Bonus</summary>
+  https://github.com/Zenika/grenoble-hands-on-angular/compare/step5...bonus
+</details>
