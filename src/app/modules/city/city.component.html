@@ -6,38 +6,39 @@
   </div>
   <div class="panel-block">
     <div class="control">
-      <label class="radio">
-        <input type="radio" name="degree" value="C" [(ngModel)]="degree">
+      <label for="celcius" class="radio">
+        <input id="celcius" type="radio" name="degree" value="C" [(ngModel)]="degree" aria-controls="weather">
         C°
       </label>
-      <label class="radio">
-        <input type="radio" name="degree" value="F" [(ngModel)]="degree">
+      <label for="fahrenheit" class="radio">
+        <input id="fahrenheit" type="radio" name="degree" value="F" [(ngModel)]="degree" aria-controls="weather">
         F°
       </label>
     </div>
     <div class="control">
-      <label class="radio">
-        <input type="radio" name="mode" value="simple" [(ngModel)]="mode">
+      <label for="simple" class="radio">
+        <input id="simple" type="radio" name="mode" value="simple" [(ngModel)]="mode" aria-controls="weather">
         Simple
       </label>
-      <label class="radio">
-        <input type="radio" name="mode" value="detailed" [(ngModel)]="mode">
+      <label for="detailed" class="radio">
+        <input id="detailed" type="radio" name="mode" value="detailed" [(ngModel)]="mode" aria-controls="weather">
         Detailed
       </label>
     </div>
   </div>
+  <div id="weather" role="region" aria-live="polite">
   <ng-container *ngIf="mode === 'simple'">
     <div class="panel-block" *ngIf="cityWeather$ | async as cityWeather; else loading">
-      <table class="table">
+      <table class="table is-flex-grow-1">
         <tr>
-          <th>Date</th>
-          <th>Weather</th>
-          <th>Max</th>
-          <th>Min</th>
+          <th scope="col">Date</th>
+          <th scope="col">Weather</th>
+          <th scope="col">Max</th>
+          <th scope="col">Min</th>
         </tr>
         <tr *ngFor="let weather of cityWeather">
-          <td>{{weather.date}}</td>
-          <td><img [src]="'http://www.7timer.info/img/misc/about_civil_'+weather.weather+'.png'" alt=""></td>
+          <td>{{weather.date | dateFormat}}</td>
+          <td><img [src]="'http://www.7timer.info/img/misc/about_civil_'+weather.weather+'.png'" [alt]="weather.weather"></td>
           <td>{{weather.temp2m.max | degree: degree}}</td>
           <td>{{weather.temp2m.min | degree: degree}}</td>
         </tr>
@@ -46,15 +47,15 @@
   </ng-container>
   <ng-container *ngIf="mode === 'detailed'">
     <div class="panel-block" *ngIf="cityWeatherDetailed$ | async as cityWeather; else loading">
-      <table class="table">
+      <table class="table is-flex-grow-1">
         <tr>
           <th>Date</th>
           <th>Weather</th>
           <th>Temp</th>
         </tr>
         <tr *ngFor="let weather of cityWeather">
-          <td>{{weather.timepoint}}</td>
-          <td>{{weather.weather}}</td>
+          <td>{{weather.timepoint}}h from now</td>
+          <td><img [src]="'http://www.7timer.info/img/misc/about_civil_' + weather.weather + '.png'" alt={weather.weather}></td>
           <td>{{weather.temp2m | degree: degree}}</td>
         </tr>
       </table>
@@ -63,6 +64,7 @@
   <ng-template #loading>
     <div class="panel-block">Loading...</div>
   </ng-template>
+  </div>
   <div class="panel-block">
     <a routerLink="/" class="button is-rounded">
       Go back home

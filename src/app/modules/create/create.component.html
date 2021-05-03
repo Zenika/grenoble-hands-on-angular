@@ -3,25 +3,25 @@
 <div class="card">
   <form class="card-content" (submit)="createCity()" [formGroup]="form">
     <div class="field">
-      <label class="label">Name</label>
+      <label for="name" class="label">Name</label>
       <div class="control">
-        <input class="input" type="text" formControlName="name" placeholder="City name">
+        <input id-="name" class="input" type="text" formControlName="name" placeholder="ex : TOULOUSE">
       </div>
-      <p class="help is-danger" *ngIf="form.get('name').touched && form.get('name').errors">Name is required</p>
+      <label for="name" class="help is-danger" *ngIf="form.get('name').touched && form.get('name').errors">Name is required</label>
     </div>
     <div class="field">
-      <label class="label">Latitude</label>
+      <label for="latitude" class="label">Latitude</label>
       <div class="control">
-        <input class="input" type="text" formControlName="latitude" placeholder="Latitude">
+        <input id="latitude" class="input" type="text" formControlName="latitude" placeholder="ex: 43.6000">
       </div>
-      <p class="help is-danger" *ngIf="form.get('latitude').touched && form.get('latitude').errors">Latitude is required and must be > -180 and < 180</p>
+      <label for="latitude" class="help is-danger" *ngIf="form.get('latitude').touched && form.get('latitude').errors">Latitude is required and must be > -180 and < 180</label>
     </div>
     <div class="field">
-      <label class="label">Longitude</label>
+      <label for="longitude" class="label">Longitude</label>
       <div class="control">
-        <input class="input" type="text" formControlName="longitude" placeholder="Longitude">
+        <input id="longitude" class="input" type="text" formControlName="longitude" placeholder="ex: 1.4333">
       </div>
-      <p class="help is-danger" *ngIf="form.get('longitude').touched && form.get('longitude').errors">Longitude is required and must be > -180 and < 180</p>
+      <label for="longitude" class="help is-danger" *ngIf="form.get('longitude').touched && form.get('longitude').errors">Longitude is required and must be > -180 and < 180</label>
     </div>
     <div class="control">
       <button type="submit" class="button is-primary" [disabled]="form.invalid">Create</button>

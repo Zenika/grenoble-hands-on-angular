@@ -8,10 +8,11 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { CityComponent } from './modules/city/city.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LMapComponent } from './shared/components/lmap/lmap.component';
-import { HttpClientModule } from "@angular/common/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DegreePipe } from './shared/pipes/degree.pipe';
 import { CreateComponent } from './modules/create/create.component';
+import { DateFormatPipe } from './shared/pipes/date-format.pipe';
 
 @NgModule({
   declarations: [
@@ -22,16 +23,17 @@ import { CreateComponent } from './modules/create/create.component';
     HomeComponent,
     LMapComponent,
     DegreePipe,
-    CreateComponent
+    DateFormatPipe,
+    CreateComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,3 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bulma";
+$primary: #008282;
+$link: #114dad;
+@import "../node_modules/bulma/bulma.sass";
 @import "~leaflet/dist/leaflet.css";
