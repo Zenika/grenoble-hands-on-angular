@@ -49,3 +49,142 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Créer un nouveau point d'entrée sur le service d'api pour consommer ces données
 - Afficher le résultat de la météo détaillée sur la page de la ville
 - Ajouter un bouton pour afficher le mode simple ou le mode détaillé 
+
+# Instructions pour le Server-side Rendering
+
+## Step 0 : Mettre à jour les dépendances
+
+Avant de commencer, nous avons décidé de mettre à jour les dépendances de notre projet. On va donc passer de la v10 à la v12. On ne voudrait pas avoir trop de versions de retard et c'est toujours appréciables d'avoir les dernières nouveautés sous la main ;)
+
+Nous avons effectué ce travail préparatoire pour vous éviter d'avoir à le faire.
+
+Si vous voulez rejouer cette étape :
+- https://update.angular.io/?v=10.1-12.0
+- ou directement
+
+```sh
+ng update @angular/cli @angular/core
+```
+
+Vérifiez ensuite que votre application fonctionne toujours. 
+
+À partir de maintenant, on prendra la page d'une ville comme base de référence pour ce TP plutôt que la racine de l'app.
+Rendez vous sur la page d'une ville (ex: `/GRENOBLE`).
+
+## Step 1 : Angular Universal
+
+Pour ajouter Angular Universal :
+```sh
+ng add @nguniversal/express-engine
+```
+
+- essayez de lancer l'application en mode ssr via la nouvelle commande `npm run dev:ssr`, pas de soucis en cas d'échec, passez à la suite ;)
+- commentez l'ensemble du contenu de la fonction `ngOnInit` du fichier `LMap.component.ts`
+- vérifiez que l'application se lance correctement cette fois-ci : `npm run dev:ssr`
+- trouvez un moyen de n'importer et de n'exécuter le code lié à la librairie `"leaflet"` uniquement coté client (indice: `PLATFORM_ID`)
+
+## Step 2 : Service SEO
+
+- injectez les services `Title` et `Meta` dans le composant `city.component.ts`
+- affichez le nom de la ville comme titre (`<title>`) et un tag (`<meta>`) contenant une description adaptée au chargement de la page
+
+## Step 3 : StateTransfer
+
+La requête HTTP de récupération de prévisions météo s'exécute deux fois (une coté serveur, puis une fois coté client). Quel gâchis !
+
+- trouvez un moyen de transférer les données coté client afin d'éviter d'avoir à re-exécuter une requête coté client. Il serait peut-être intéressant de sérialiser la réponse (tout est dans le titre 😉)
+
+## Step 4 : StateTransfer, le retour
+
+Sérialiser des réponses c'est bien, mais il serait préférable de ne pas avoir à le faire manuellement pour chaque service faisant des appels HTTP. 
+Si seulement l'équipe d'Angular avait pensé à fournir un intercepteur http pour cela... 😏
+
+- trouvez un moyen plus automatique de transférer les données
+
+## Step 5 : Mettre un cache coté serveur
+
+Les prévisions météo peuvent changer mais peut-être pas toutes les 5 minutes.
+Plutôt que d'exécuter un nouveau rendu à chaque requête, il serait préférable de stocker temporairement le rendu de la page et de servir ce résultat pour les prochaines visites.
+
+- mettez en place un cache "en mémoire" grâce au package `memory-cache` :
+
+```sh
+npm i memory-cache
+```
+
+Il est possible de passer un callback à la fonction `render` pour manipuler le html résultant du rendu :
+
+```typescript
+import * as cache from 'memory-cache';
+
+// [...]
+
+res.render(
+  indexHtml,
+  { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] },
+  (_, html) => {
+    cache.put(req.originalUrl, html); // mise en cache ici [1]
+    res.send(html);
+  }
+);
+```
+
+- trouvez un moyen de retourner le html mis en cache en [1] quand celui-ci existe
+- faites expirer ce cache au bout de `n` minutes/heures (au choix)
+
+## Step 6 : Compression
+Jusqu'ici, nos fichiers sont transmis non compressés. Afin d'améliorer la vitesse de téléchargement, il est préférable de diminuer leur taille en les compressant.
+
+Il sera nécessaire de mettre les mains dans la config Webpack, et donc, pour cette étape, suivez le guide !
+
+- installez quelques dépendances pour configurer Webpack
+```sh
+npm i brotli-webpack-plugin compression-webpack-plugin @angular-builders/custom-webpack:browser express-static-gzip
+```
+- changez le builder  par :
+```json
+"builder": "@angular-builders/custom-webpack:browser",
+"options": {
+  "customWebpackConfig": {
+    "path": "./custom-webpack.config.js"
+  },
+  // ...
+}
+```
+
+- créez le fichier `custom-webpack.config.js` avec le contenu suivant :
+```javascript
+const CompressionPlugin = require(`compression-webpack-plugin`);
+const BrotliPlugin = require(`brotli-webpack-plugin`);
+
+module.exports = {
+  plugins: [
+    new BrotliPlugin({
+      asset: "[fileWithoutExt].[ext].br",
+      test: /\.(js|css|html|svg|txt|eot|otf|ttf|gif)$/,
+    }),
+    new CompressionPlugin({
+      test: /\.(js|css|html|svg|txt|eot|otf|ttf|gif)$/,
+      filename: "[path][base].gz",
+    }),
+  ],
+};
+```
+- pour finir, remplacez la fonction `express.static` par `expressStaticGzip` et l'import qui va bien dans `server.ts` :
+```typescript
+import * as expressStaticGzip from 'express-static-gzip';
+
+// [...]
+
+expressStaticGzip(distFolder, {
+  enableBrotli: true,
+  orderPreference: ['br', 'gzip'],
+  serveStatic: {
+    maxAge: '1y',
+  },
+})
+```
+
+- relancez le tout et testez
+
+Bravo vous êtes arrivés au bout de ce TP ! 👏
