@@ -27,7 +27,7 @@ import { DateFormatPipe } from './shared/pipes/date-format.pipe';
     CreateComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     AppRoutingModule,
     FormsModule,

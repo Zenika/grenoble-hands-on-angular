@@ -1,44 +1,49 @@
-import {AfterViewInit, Component, Input} from '@angular/core';
-import {Icon, LatLng, Map, Marker, TileLayer} from "leaflet";
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
+import { Inject } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-l-map',
   templateUrl: './lmap.component.html',
-  styleUrls: ['./lmap.component.scss']
+  styleUrls: ['./lmap.component.scss'],
 })
 export class LMapComponent implements AfterViewInit {
-
   @Input()
-  zoom = 13
+  zoom = 13;
   @Input()
-  lat: number
+  lat: number;
   @Input()
-  long: number
+  long: number;
 
   private map: any;
 
-
-  constructor() {
-  }
+  constructor(@Inject(PLATFORM_ID) private readonly platformId: unknown) {}
 
   ngAfterViewInit(): void {
-    this.map = new Map('mapId').setView([this.lat, this.long], this.zoom)
-    const tileLayer = new TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-      maxZoom: 18,
-      tileSize: 512,
-      zoomOffset: -1,
-    });
-    const marker = new Marker(new LatLng(this.lat, this.long), {
-      icon: new Icon({
-        iconSize: [25, 41],
-        iconAnchor: [13, 0],
-        iconUrl: 'assets/leaflet/marker-icon.png',
-        shadowUrl: 'assets/leaflet/marker-shadow.png'
-      })
-    });
-    tileLayer.addTo(this.map);
-    marker.addTo(this.map)
+    if (isPlatformBrowser(this.platformId)) {
+      const { Icon, LatLng, Map, Marker, TileLayer } = require('leaflet');
+      this.map = new Map('mapId').setView([this.lat, this.long], this.zoom);
+      const tileLayer = new TileLayer(
+        'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+        {
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+          maxZoom: 18,
+          tileSize: 512,
+          zoomOffset: -1,
+        }
+      );
+      const marker = new Marker(new LatLng(this.lat, this.long), {
+        icon: new Icon({
+          iconSize: [25, 41],
+          iconAnchor: [13, 0],
+          iconUrl: 'assets/leaflet/marker-icon.png',
+          shadowUrl: 'assets/leaflet/marker-shadow.png',
+        }),
+      });
+      tileLayer.addTo(this.map);
+      marker.addTo(this.map);
+    }
   }
-
 }
