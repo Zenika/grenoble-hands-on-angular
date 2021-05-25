@@ -29,6 +29,7 @@
     "bulma": "^0.9.1",
     "express": "^4.15.2",
     "leaflet": "^1.7.1",
+    "memory-cache": "^0.2.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
