@@ -1,3 +1,4 @@
+import { TransferHttpCacheModule } from '@nguniversal/common';
 import {
   BrowserModule,
   BrowserTransferStateModule,
@@ -36,6 +37,7 @@ import { DateFormatPipe } from './shared/pipes/date-format.pipe';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    TransferHttpCacheModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
