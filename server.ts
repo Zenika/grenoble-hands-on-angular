@@ -8,6 +8,7 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import * as cache from 'memory-cache';
+import * as expressStaticGzip from 'express-static-gzip';
 
 const CACHE_DURATION_IN_MS = 60 * 60 * 1000; // 1 hour
 
@@ -35,8 +36,12 @@ export function app(): express.Express {
   // Serve static files from /browser
   server.get(
     '*.*',
-    express.static(distFolder, {
-      maxAge: '1y',
+    expressStaticGzip(distFolder, {
+      enableBrotli: true,
+      orderPreference: ['br', 'gzip'],
+      serveStatic: {
+        maxAge: '1y',
+      },
     })
   );
 

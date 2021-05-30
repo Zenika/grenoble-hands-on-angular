@@ -28,6 +28,7 @@
     "@nguniversal/express-engine": "^12.0.0",
     "bulma": "^0.9.1",
     "express": "^4.15.2",
+    "express-static-gzip": "^2.1.1",
     "leaflet": "^1.7.1",
     "memory-cache": "^0.2.0",
     "rxjs": "~6.6.0",
@@ -35,6 +36,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^12.0.0",
     "@angular-builders/jest": "^10.0.1",
     "@angular-devkit/build-angular": "~12.0.1",
     "@angular/cli": "~12.0.1",
@@ -44,7 +46,9 @@
     "@types/jest": "^26.0.15",
     "@types/leaflet": "^1.5.19",
     "@types/node": "^12.11.1",
+    "brotli-webpack-plugin": "^1.1.0",
     "codelyzer": "^6.0.0",
+    "compression-webpack-plugin": "^8.0.0",
     "jest": "^26.5.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
