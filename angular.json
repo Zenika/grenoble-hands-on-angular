@@ -94,7 +94,6 @@
       }
     }
   },
-  "defaultProject": "grenoble-hands-on",
   "cli": {
     "analytics": false
   }
