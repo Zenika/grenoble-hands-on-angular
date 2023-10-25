@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LMapComponent } from '../../shared/components/lmap/lmap.component';
 
@@ -9,16 +9,8 @@ import { LMapComponent } from '../../shared/components/lmap/lmap.component';
     standalone: true,
     imports: [LMapComponent, RouterLink]
 })
-export class CityComponent implements OnInit {
-
+export class CityComponent {
   cityLatitude = 45.183916;
   cityLongitude = 5.703630;
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-
-  }
 
 }

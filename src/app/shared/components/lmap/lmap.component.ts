@@ -18,10 +18,6 @@ export class LMapComponent implements AfterViewInit {
 
   private map: any;
 
-
-  constructor() {
-  }
-
   ngAfterViewInit(): void {
     this.map = new Map('mapId').setView([this.lat, this.long], this.zoom)
     const tileLayer = new TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
