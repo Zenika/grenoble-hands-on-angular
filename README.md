@@ -9,7 +9,7 @@ npm start
 
 ### Customize configuration
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.10.
 
 ## Step 1 : Afficher la météo du jour pour Grenoble
 
