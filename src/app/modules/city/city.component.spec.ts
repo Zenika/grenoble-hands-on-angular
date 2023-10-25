@@ -9,8 +9,9 @@ describe('CityComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CityComponent, LMapComponent ]
-    })
+    declarations: [CityComponent, LMapComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   });
 

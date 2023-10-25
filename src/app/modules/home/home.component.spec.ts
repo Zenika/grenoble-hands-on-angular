@@ -9,9 +9,10 @@ describe('HomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent],
-      imports: [RouterTestingModule]
-    })
+    declarations: [HomeComponent],
+    imports: [RouterTestingModule],
+    teardown: { destroyAfterEach: false }
+})
       .compileComponents();
   }));
 

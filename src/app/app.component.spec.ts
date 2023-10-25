@@ -7,15 +7,16 @@ import {RouterTestingModule} from "@angular/router/testing";
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
+    imports: [
         RouterTestingModule
-      ],
-      declarations: [
+    ],
+    declarations: [
         AppComponent,
         NavbarComponent,
         FooterComponent
-      ],
-    }).compileComponents();
+    ],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   it('should create the app', () => {
