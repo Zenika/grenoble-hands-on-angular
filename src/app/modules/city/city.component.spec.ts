@@ -9,7 +9,7 @@ describe('CityComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [CityComponent, LMapComponent],
+    imports: [CityComponent, LMapComponent],
     teardown: { destroyAfterEach: false }
 })
     .compileComponents();

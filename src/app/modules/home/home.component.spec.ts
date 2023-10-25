@@ -9,8 +9,7 @@ describe('HomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    declarations: [HomeComponent],
-    imports: [RouterTestingModule],
+    imports: [RouterTestingModule, HomeComponent],
     teardown: { destroyAfterEach: false }
 })
       .compileComponents();
