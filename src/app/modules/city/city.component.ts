@@ -8,19 +8,23 @@ import {CommonModule} from "@angular/common";
 import {CitiesService} from "../../shared/services/cities.service";
 import {map} from "rxjs/operators";
 import {Coordinates} from "../../shared/model/coordinates";
+import {DegreePipe} from "../../shared/pipe/degree.pipe";
+import {FormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-city',
     templateUrl: './city.component.html',
     styleUrls: ['./city.component.scss'],
     standalone: true,
-    imports: [LMapComponent, RouterLink, CommonModule]
+  imports: [LMapComponent, RouterLink, CommonModule, DegreePipe, FormsModule]
 })
 export class CityComponent implements OnInit {
 
   cityName$: Observable<string>;
   cityWeather$: Observable<Weather[]>;
   cityCoords$: Observable<Coordinates>;
+
+  degree: 'C' | 'F' = 'C';
 
   constructor(protected weatherService: WeatherService, protected citiesService: CitiesService, protected route: ActivatedRoute) {
   }

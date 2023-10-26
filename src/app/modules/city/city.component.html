@@ -4,6 +4,18 @@
   <div class="panel-block">
     <app-l-map zoom="13"  *ngIf="cityCoords$ | async as coords; else loading" [lat]="coords.latitude" [long]="coords.longitude"></app-l-map>
   </div>
+  <div class="panel-block">
+    <div class="control">
+      <label class="radio">
+        <input type="radio" name="degree" value="C" [(ngModel)]="degree">
+        C°
+      </label>
+      <label class="radio">
+        <input type="radio" name="degree" value="F" [(ngModel)]="degree">
+        F°
+      </label>
+    </div>
+  </div>
   <div class="panel-block" *ngIf="cityWeather$ | async as cityWeather; else loading">
     <table class="table">
       <tr>
@@ -15,8 +27,8 @@
       <tr *ngFor="let weather of cityWeather">
         <td>{{weather.date}}</td>
         <td><img [src]="'http://www.7timer.info/img/misc/about_civil_'+weather.weather+'.png'" alt=""></td>
-        <td>{{weather.temp2m.max}}</td>
-        <td>{{weather.temp2m.min}}</td>
+        <td>{{weather.temp2m.max | degree: degree}}</td>
+        <td>{{weather.temp2m.min | degree: degree}}</td>
       </tr>
     </table>
   </div>
