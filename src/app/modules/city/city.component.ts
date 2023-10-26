@@ -19,14 +19,13 @@ import {Coordinates} from "../../shared/model/coordinates";
 export class CityComponent implements OnInit {
 
   cityName$: Observable<string>;
-  cityWeather$: Observable<Weather>;
+  cityWeather$: Observable<Weather[]>;
   cityCoords$: Observable<Coordinates>;
 
   constructor(protected weatherService: WeatherService, protected citiesService: CitiesService, protected route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.cityWeather$ = this.weatherService.getCityTodayWeather(this.cityLongitude, this.cityLatitude);
     this.cityName$ = this.route.params.pipe(
       map(params => params.cityName)
     )
@@ -34,7 +33,7 @@ export class CityComponent implements OnInit {
       map(cityName => this.citiesService.getCityPosition(cityName))
     )
     this.cityWeather$ = this.cityCoords$.pipe(
-      mergeMap(coords => this.weatherService.getCityTodayWeather(coords.longitude, coords.latitude)),
+      mergeMap(coords => this.weatherService.getCityNextWeekWeather(coords.longitude, coords.latitude)),
     )
   }
 

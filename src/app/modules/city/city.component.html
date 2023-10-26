@@ -12,11 +12,11 @@
         <th>Max</th>
         <th>Min</th>
       </tr>
-      <tr>
-        <td>{{cityWeather.date}}</td>
-        <td>{{cityWeather.weather}}</td>
-        <td>{{cityWeather.temp2m.max}}</td>
-        <td>{{cityWeather.temp2m.min}}</td>
+      <tr *ngFor="let weather of cityWeather">
+        <td>{{weather.date}}</td>
+        <td><img [src]="'http://www.7timer.info/img/misc/about_civil_'+weather.weather+'.png'" alt=""></td>
+        <td>{{weather.temp2m.max}}</td>
+        <td>{{weather.temp2m.min}}</td>
       </tr>
     </table>
   </div>
