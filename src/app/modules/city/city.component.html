@@ -1,8 +1,8 @@
 <h1 class="title">Cities weather</h1>
 <article class="panel is-primary">
-  <div class="panel-heading"><h2>GRENOBLE</h2></div>
+  <div class="panel-heading"><h2>{{cityName$ | async}}</h2></div>
   <div class="panel-block">
-    <app-l-map zoom="13" [lat]="cityLatitude" [long]="cityLongitude"></app-l-map>
+    <app-l-map zoom="13"  *ngIf="cityCoords$ | async as coords; else loading" [lat]="coords.latitude" [long]="coords.longitude"></app-l-map>
   </div>
   <div class="panel-block" *ngIf="cityWeather$ | async as cityWeather; else loading">
     <table class="table">
@@ -20,12 +20,13 @@
       </tr>
     </table>
   </div>
-  <ng-template #loading>
-    <div class="panel-block">Loading...</div>
-  </ng-template>
   <div class="panel-block">
     <a routerLink="/" class="button is-rounded">
       Go back home
     </a>
   </div>
 </article>
+
+<ng-template #loading>
+  <div class="panel-block">Loading...</div>
+</ng-template>
