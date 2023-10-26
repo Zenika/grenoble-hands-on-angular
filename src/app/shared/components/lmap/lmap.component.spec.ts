@@ -8,8 +8,9 @@ describe('LMapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LMapComponent ]
-    })
+    imports: [LMapComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   });
 
