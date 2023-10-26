@@ -2,9 +2,10 @@ import {AfterViewInit, Component, Input} from '@angular/core';
 import {Icon, LatLng, Map, Marker, TileLayer} from "leaflet";
 
 @Component({
-  selector: 'app-l-map',
-  templateUrl: './lmap.component.html',
-  styleUrls: ['./lmap.component.scss']
+    selector: 'app-l-map',
+    templateUrl: './lmap.component.html',
+    styleUrls: ['./lmap.component.scss'],
+    standalone: true
 })
 export class LMapComponent implements AfterViewInit {
 
@@ -16,10 +17,6 @@ export class LMapComponent implements AfterViewInit {
   long: number
 
   private map: any;
-
-
-  constructor() {
-  }
 
   ngAfterViewInit(): void {
     this.map = new Map('mapId').setView([this.lat, this.long], this.zoom)

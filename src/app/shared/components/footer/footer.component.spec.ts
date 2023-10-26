@@ -8,8 +8,9 @@ describe('FooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FooterComponent ]
-    })
+    imports: [FooterComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   });
 
