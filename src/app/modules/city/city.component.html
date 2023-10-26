@@ -4,6 +4,25 @@
   <div class="panel-block">
     <app-l-map zoom="13" [lat]="cityLatitude" [long]="cityLongitude"></app-l-map>
   </div>
+  <div class="panel-block" *ngIf="cityWeather$ | async as cityWeather; else loading">
+    <table class="table">
+      <tr>
+        <th>Date</th>
+        <th>Weather</th>
+        <th>Max</th>
+        <th>Min</th>
+      </tr>
+      <tr>
+        <td>{{cityWeather.date}}</td>
+        <td>{{cityWeather.weather}}</td>
+        <td>{{cityWeather.temp2m.max}}</td>
+        <td>{{cityWeather.temp2m.min}}</td>
+      </tr>
+    </table>
+  </div>
+  <ng-template #loading>
+    <div class="panel-block">Loading...</div>
+  </ng-template>
   <div class="panel-block">
     <a routerLink="/" class="button is-rounded">
       Go back home

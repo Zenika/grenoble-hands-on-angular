@@ -2,7 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CityComponent } from './city.component';
 import {LMapComponent} from "../../shared/components/lmap/lmap.component";
-import {RouterTestingModule} from "@angular/router/testing";
+import {provideHttpClientTesting} from "@angular/common/http/testing";
+import {provideRouter} from "@angular/router";
+import {provideHttpClient} from "@angular/common/http";
 
 describe('CityComponent', () => {
   let component: CityComponent;
@@ -10,7 +12,13 @@ describe('CityComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [CityComponent, LMapComponent, RouterTestingModule],
+    imports: [CityComponent, LMapComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+
+        provideRouter([]),
+      ],
     teardown: { destroyAfterEach: false }
 })
     .compileComponents();
