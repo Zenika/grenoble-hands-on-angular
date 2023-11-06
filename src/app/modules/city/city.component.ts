@@ -10,6 +10,7 @@ import {map} from "rxjs/operators";
 import {Coordinates} from "../../shared/model/coordinates";
 import {DegreePipe} from "../../shared/pipe/degree.pipe";
 import {FormsModule} from "@angular/forms";
+import {WeatherDetailed} from "../../shared/model/weather-detailed";
 
 @Component({
     selector: 'app-city',
@@ -22,9 +23,11 @@ export class CityComponent implements OnInit {
 
   cityName$: Observable<string>;
   cityWeather$: Observable<Weather[]>;
+  cityWeatherDetailed$: Observable<WeatherDetailed[]>;
   cityCoords$: Observable<Coordinates>;
 
   degree: 'C' | 'F' = 'C';
+  mode: 'simple' | 'detailed' = "simple";
 
   constructor(protected weatherService: WeatherService, protected citiesService: CitiesService, protected route: ActivatedRoute) {
   }
@@ -38,6 +41,9 @@ export class CityComponent implements OnInit {
     )
     this.cityWeather$ = this.cityCoords$.pipe(
       mergeMap(coords => this.weatherService.getCityNextWeekWeather(coords.longitude, coords.latitude)),
+    )
+    this.cityWeatherDetailed$ = this.cityCoords$.pipe(
+      mergeMap(coords => this.weatherService.getCityDetailedWeather(coords.longitude, coords.latitude)),
     )
   }
 
